@@ -14,23 +14,19 @@ public class Window {
   public void initalize() {
 
 
-
-    error1 = loadImage(Errors.NUKED.imageName);
-    error2 = loadImage(Errors.NO_INTERNET.imageName);
-    error3 = loadImage(Errors.EXPLORER_BUSY.imageName);
-    error4 = loadImage(Errors.INSTALL_LINUX.imageName);
-    error5 = loadImage(Errors.VIRUS_DETECTED.imageName);
-    errors.add(error1);
-    errors.add(error2);
-    errors.add(error3);
-    errors.add(error4);
-    errors.add(error5);
+    for(ErrorType et: ErrorType.values()){
+      PImage errorImage = loadImage(et.imageName);
+      et.image = errorImage;
+      errors.add(errorImage);
+    }
+   
   }
-  public void create(int errorNumber, int x, int y) {
+  
+  public void create(ErrorType errorType, int x, int y) {
 
     this.windowX = x;
     this.windowY = y;
-    this.windowPhoto = errors.get(errorNumber);
+    this.windowPhoto = errorType.image;
     this.grabareaWidth = windowPhoto.width;
     this.grabareaHeight = 25;
   }

@@ -1,5 +1,5 @@
 
- public static enum Errors {
+ public static enum ErrorType {
     NUKED("Error Message nuked.png"),
     NO_INTERNET("Error Message.png"),
     EXPLORER_BUSY("explorer is busy.png"),
@@ -7,8 +7,9 @@
     VIRUS_DETECTED("virus detected.png");
   
     public String imageName;
+    public PImage image;
   
-    private Errors(String imageName){
+    private ErrorType(String imageName){
       this.imageName = imageName;
     }
     

@@ -1,28 +1,32 @@
 int origX;
 int origY;
 boolean alertOn;
-int laskuri;
+int laskuri = 0;
 ArrayList<Window> ikkunat = new ArrayList();
 Window captured;
 PImage background;
+int maxErrors =4;
 
 
 void setup() {
-  //size(255,255,P2D);
+  //size(1000,500,P2D);
   fullScreen(P2D);
   background(255);
   background = loadImage("windows xp background.png");
-  newError(3);
 }
 void draw() {
-  image(background,0 ,0 ,width ,height);
-  newError(int(random(5)));
-
+  
+  image(background, 0, 0, width, height);
+  if (int(random(10))==1 && laskuri < maxErrors) {
+    laskuri += 1;
+    newError(getRandomErrorType());
+  }
   drawIkkunat();
 }
 void keyPressed() {
-  if(int(random(1000000))==1)
-  newError(int(random(5)));
+  if (int(random(1000000000))==1)
+
+    newError(getRandomErrorType());
 }
 void mouseDragged() {
 
@@ -56,10 +60,16 @@ void mousePressed() {
 void mouseReleased() {
   captured = null;
 }
-Window newError(int errorPhoto) {
+Window newError(ErrorType errorType) {
   Window window = new Window();
   window.initalize();
-  window.create(errorPhoto, int (random(width)), int (random(height)));
+  window.create(errorType, int (random(width)), int (random(height)));
   ikkunat.add(window); 
   return(window);
+}
+public ErrorType getRandomErrorType() {
+  int length = ErrorType.values().length;
+  int errorIndex = int(random(length));
+  ErrorType[] errorTypes = ErrorType.values();
+  return errorTypes[errorIndex];
 }
