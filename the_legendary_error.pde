@@ -9,14 +9,16 @@ int maxErrors =0;
 
 
 void setup() {
-  size(1000,500,P2D);
-  //fullScreen(P2D);
+  //size(1000, 500, P2D);
+  fullScreen(P2D);
   frameRate(200);
   background(255);
   background = loadImage("windows xp background.png");
 }
 void draw() {
-  
+  if(captured != null){
+  moveLast(captured);
+  }
   image(background, 0, 0, width, height);
   if (int(random(10))==1 && laskuri < maxErrors) {
     laskuri += 1;
@@ -28,11 +30,6 @@ void draw() {
   }
   drawIkkunat();
 }
-void keyPressed() {
-  if (int(random(1000000000))==1)
-
-    newError(getRandomErrorType());
-}
 void mouseDragged() {
 
   int deltaX = mouseX - origX;
@@ -40,8 +37,7 @@ void mouseDragged() {
   origX = mouseX;
   origY = mouseY;
   if (captured != null) {
-    captured.move(deltaX, deltaY);
-    moveLast(captured);
+    captured.move(deltaX, deltaY);  
     //captured.draw();
   }
 }
@@ -61,7 +57,6 @@ void mousePressed() {
       selected = ikkuna;
     }
   }
-  moveLast(selected);
 }
 void mouseReleased() {
   captured = null;
@@ -79,7 +74,7 @@ public ErrorType getRandomErrorType() {
   ErrorType[] errorTypes = ErrorType.values();
   return errorTypes[errorIndex];
 }
-void moveLast(Window moveMe){
+void moveLast(Window moveMe) {
   ikkunat.remove(moveMe);
   ikkunat.add(moveMe);
 }
