@@ -4,11 +4,6 @@ public class Window {
   int grabareaWidth;
   int grabareaHeight;
   PImage windowPhoto;
-  /*PImage error1;
-  PImage error2;
-  PImage error3;
-  PImage error4;
-  PImage error5;*/
   ArrayList<PImage> errors = new ArrayList<PImage>();
 
   public void initalize() {
