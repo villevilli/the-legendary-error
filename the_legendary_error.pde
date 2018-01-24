@@ -5,10 +5,12 @@ int laskuri = 0;
 ArrayList<Window> ikkunat = new ArrayList();
 Window captured;
 PImage background;
-int maxErrors =0;
+PImage rip_you;
+int maxErrors =20;
 
 
 void setup() {
+  rip_you = loadImage("your computer is infected with virus.png");
   //size(1000, 500, P2D);
   fullScreen(P2D);
   frameRate(200);
@@ -16,11 +18,17 @@ void setup() {
   background = loadImage("windows xp background.png");
 }
 void draw() {
-  if(captured != null){
-  moveLast(captured);
+  if (captured != null) {
+    moveLast(captured);
   }
   image(background, 0, 0, width, height);
-  if (int(random(10))==1 && laskuri < maxErrors) {
+
+  
+  if (int(random(20))==1 && maxErrors == 0) {
+    laskuri += 1;
+    newError(getRandomErrorType());
+  }
+  if (int(random(20))==1 && laskuri < maxErrors) {
     laskuri += 1;
     newError(getRandomErrorType());
   }
@@ -48,6 +56,8 @@ void drawIkkunat() {
   }
 }
 void mousePressed() {  
+  println(mouseX);
+  println(mouseY);
   Window selected = new Window(); 
   for (Window ikkuna : ikkunat) {
     if (ikkuna.isInside(mouseX, mouseY)) {
